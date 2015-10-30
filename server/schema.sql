@@ -3,15 +3,31 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
-  /* Describe your table here.*/
+  username varchar(15),
+  textmessage varchar(180),
+  roomname varchar(15)  
 );
 
-/* Create other tables and define schemas for them here! */
+CREATE TABLE users (
+  username varchar(15)
+);
+
+CREATE TABLE friends (
+  username varchar(15)
+);
+
+
+/*  
+sample message:
+        var message = {
+          username: 'Mel Brooks',
+          text: 'It\'s good to be the king',
+          roomname: 'lobby'
+        };
 
 
 
-
-/*  Execute this file from the command line by typing:
+Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
 
