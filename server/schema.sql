@@ -16,6 +16,10 @@ CREATE TABLE friends (
   username varchar(15)
 );
 
+CREATE TABLE romos (
+  roomname varchar
+);
+
 
 /*  
 sample message:
