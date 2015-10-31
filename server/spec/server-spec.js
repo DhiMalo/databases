@@ -16,11 +16,11 @@ describe("Persistent Node Chat Server", function() {
     });
     dbConnection.connect();
 
-       var tablename = ""; // TODO: fill this out
+       var tablename = "messages"; // DONE 
 
-    /* Empty the db table before each test so that multiple tests
-     * (or repeated runs of the tests) won't screw each other up: */
-    dbConnection.query("truncate " + tablename, done);
+    dbConnection.query("truncate " + tablename, done); //Empties the db table before each test 
+    //so that multiple tests (or repeated runs of the tests) won't screw each other up: */
+
   });
 
   afterEach(function() {
@@ -28,33 +28,26 @@ describe("Persistent Node Chat Server", function() {
   });
 
   it("Should insert posted messages to the DB", function(done) {
-    // Post the user to the chat server.
-    request({ method: "POST",
+    request({ method: "POST", // Post the user to the chat server.
               uri: "http://127.0.0.1:3000/classes/users",
               json: { username: "Valjean" }
     }, function () {
-      // Post a message to the node chat server:
-      request({ method: "POST",
+      request({ method: "POST", // Posts a message to the node chat server:
               uri: "http://127.0.0.1:3000/classes/messages",
               json: {
                 username: "Valjean",
-                message: "In mercy's name, three days is all I need.",
+                text: "In mercy's name, three days is all I need.", // NOTE: Changed from 'messages' to 'text' -DhiMalo
                 roomname: "Hello"
               }
       }, function () {
-        // Now if we look in the database, we should find the
-        // posted message there.
+        // Should find the posted message in the database now.
 
-        // TODO: You might have to change this test to get all the data from
-        // your message table, since this is schema-dependent.
+        //NOTE: changed this test to get all the data from the message table. May need to revisit if it does not take. -DhiMalo
         var queryString = "SELECT * FROM messages";
         var queryArgs = [];
 
         dbConnection.query(queryString, queryArgs, function(err, results) {
-          // Should have one result:
-          expect(results.length).to.equal(1);
-
-          // TODO: If you don't have a column named text, change this test.
+          expect(results.length).to.equal(1);  // Should have one result
           expect(results[0].text).to.equal("In mercy's name, three days is all I need.");
 
           done();
@@ -65,10 +58,7 @@ describe("Persistent Node Chat Server", function() {
 
   it("Should output all messages from the DB", function(done) {
     // Let's insert a message into the db
-       var tablename = ""; // TODO: fill this out
-    // TODO - The exact query string and query args to use
-    // here depend on the schema you design, so I'll leave
-    // them up to you. */
+       var tablename = "message"; // NOTE: This was customized to the designed schema -DhiMalo
 
     dbConnection.query(queryString, queryArgs, function(err) {
       if (err) { throw err; }
