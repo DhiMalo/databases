@@ -4,7 +4,7 @@ USE chat;
 
 CREATE TABLE messages (
   username varchar(15),
-  textmessage varchar(180),
+  text varchar(180),
   roomname varchar(15)  
 );
 
@@ -30,4 +30,6 @@ sample message:
 Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
+
+
 
